@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro'
+import getImageUrl from '@/utils/getImageUrl'
+
+import type { Project } from '@/api'
+import { getProjects } from '@/api'
+
+const projects = await getProjects()
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<div class="c-project-list">
+			{
+				projects && projects.length ? projects.map((project: Project) => (
+					<div class="c-project">
+						<h2>{project.title}</h2>
+						{
+							project.location ? (
+								<div class="c-project__location">{project.location}</div>
+							) : ''
+						}
+						<div class="c-project__image">
+							<img src={getImageUrl(project.image.asset._ref)} alt="">
+						</div>
+					</div>
+				)) : 'Sem projetos'
+			}
+		</div>
+	</main>
+</Layout>
+
+<style>
+</style>

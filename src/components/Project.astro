@@ -1,0 +1,36 @@
+---
+interface Project {
+  title: string
+  location?: string
+}
+
+const { title, location } = Astro.props
+---
+
+
+<div class="c-project">
+  <h2>{title}</h2>
+  {
+    location ? (
+      <div class="c-project__location">{location}</div>
+    ) : ''
+  }
+  <div class="c-project__gallery">
+    <slot />
+  </div>
+</div>
+
+<style>
+.c-project {
+  min-height: 85vh;
+}
+.c-project__location {
+  margin-block-end: var(--sl-spacing-small, 1.8rem);
+  font-size: var(--sl-font-size-large, 1.3rem);
+}
+.c-project__gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sl-spacing-medium);
+}
+</style>

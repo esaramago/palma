@@ -1,0 +1,73 @@
+---
+interface ProjectImage {
+  alt?: string
+  src?: string
+  isWide: boolean
+}
+interface Project {
+  title: string
+  location?: string
+  gallery?: Array<ProjectImage>
+}
+
+const { title, location, gallery } = Astro.props
+---
+
+
+<div class="c-project">
+  <h2>{title}</h2>
+  {
+    location ? (
+      <div class="c-project__location">{location}</div>
+    ) : ''
+  }
+  <div class="c-project__gallery">
+    {
+      gallery && gallery.length ? gallery.map(image => (
+        <div>
+          <img class={`c-project__image ${image.isWide && 'is-wide'}`} src={image.src} alt={image.alt} />
+        </div>
+      )) : 'Sem imagens'
+    }
+  </div>
+</div>
+
+<style>
+.c-project {
+  min-height: 85vh;
+}
+.c-project__location {
+  margin-block-end: var(--sl-spacing-small, 1.8rem);
+  font-size: var(--sl-font-size-large, 1.3rem);
+}
+.c-project__gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sl-spacing-medium);
+}
+.c-project-image {
+  width: calc(50% - (var(--media-gap) / 2));
+  overflow: hidden;
+}
+.c-project-image > img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 5/4;
+}
+
+/* Full */
+.c-project-image.is-wide {
+  flex: 1 0 100%;
+}
+
+@media (max-width: 919px) {
+  .c-project-image {
+    flex: 1 0 100%;
+  }
+}
+@media (min-width: 920px) {
+  .c-project-image.is-wide > img {
+    aspect-ratio: 10/4;
+  }
+}
+</style>

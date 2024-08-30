@@ -1,0 +1,16 @@
+body {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  font-size: var(--sl-font-size-medium);
+  font-family: var(--sl-font-serif);
+  color: var(--sl-color-neutral-900);
+}
+main {
+  flex-grow: 1;
+  max-width: 180rem;
+  width: 100%;
+  padding-inline: var(--sl-spacing-large);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
