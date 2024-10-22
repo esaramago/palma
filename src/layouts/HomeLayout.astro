@@ -1,0 +1,50 @@
+---
+import Layout from './Layout.astro'
+---
+<Layout title="Palma, Arquitetura Paisagista">
+  <header class="header">
+    <h1 class="container">
+      <div class="title">
+        <span class="exclamation-mark">¡</span>Arquitetura paisagista<span class="exclamation-mark">!</span>
+      </div>
+      <div class="name">Paulo Palma</div>
+    </h1>
+  </header>
+  <slot />
+</Layout>
+
+<style>
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  box-sizing: border-box;
+  padding: var(--sl-spacing-medium) var(--sl-spacing-large);
+}
+.container {
+  display: inline-flex;
+  flex-direction: column;
+}
+.title {
+  text-align: center;
+  font-size: clamp(4rem, 7vw, 12rem);
+  line-height: 120%;
+}
+.name {
+  text-align: right;
+  font-weight: 300;
+  font-size: var(--sl-font-size-2x-large);
+}
+.exclamation-mark {
+  color: #BBB;
+  font-weight: 900;
+}
+@media (max-width: 768px) {
+  .name {
+    margin-block-start: var(--sl-spacing-x-small);
+    font-size: var(--sl-font-size-x-large);
+    text-align: center;
+  }
+}
+</style>

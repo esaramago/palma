@@ -1,34 +1,34 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import getImageUrl from '@/utils/getImageUrl'
+import HomeLayout from '@/layouts/HomeLayout.astro'
 
-import type { Project } from '@/api'
+import type { Project as ProjectType } from '@/api'
+import Project from '@/components/Project.astro'
 import { getProjects } from '@/api'
 
 const projects = await getProjects()
+
 ---
 
-<Layout title="Welcome to Astro.">
+<HomeLayout title="Palma Studio">
 	<main>
-		<div class="c-project-list">
+		<div class="project-list">
 			{
-				projects && projects.length ? projects.map((project: Project) => (
-					<div class="c-project">
-						<h2>{project.title}</h2>
-						{
-							project.location ? (
-								<div class="c-project__location">{project.location}</div>
-							) : ''
-						}
-						<div class="c-project__image">
-							<img src={getImageUrl(project.image.asset._ref)} alt="">
-						</div>
-					</div>
+				projects && projects.length ? projects.map((project: ProjectType) => (
+					<Project
+						title={project.title}
+						location={project.location}
+						images={project.gallery?.images}
+					/>
 				)) : 'Sem projetos'
 			}
 		</div>
 	</main>
-</Layout>
+</HomeLayout>
 
 <style>
+	.project-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--sl-spacing-x-large);
+	}
 </style>

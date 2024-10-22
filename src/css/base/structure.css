@@ -1,16 +1,23 @@
 body {
-  display: flex;
-  flex-direction: column;
   line-height: 1.2;
   font-size: var(--sl-font-size-medium);
   font-family: var(--sl-font-serif);
   color: var(--sl-color-neutral-900);
 }
 main {
-  flex-grow: 1;
-  max-width: 180rem;
   width: 100%;
-  padding-inline: var(--sl-spacing-large);
+  padding-inline: var(--sl-spacing-x-large);
   margin-inline: auto;
   box-sizing: border-box;
+}
+
+@media (max-width: 1140px) {
+  main {
+    padding-inline: var(--sl-spacing-large);
+  }
+}
+@media (max-width: 768px) {
+  main {
+    padding-inline: var(--sl-spacing-medium);
+  }
 }

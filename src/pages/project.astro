@@ -1,15 +1,4 @@
 ---
-interface ProjectImage {
-  alt?: string
-  src?: string
-  isWide: boolean
-}
-interface Project {
-  title: string
-  location?: string
-  gallery?: Array<ProjectImage>
-}
-
 const { title, location, gallery } = Astro.props
 ---
 

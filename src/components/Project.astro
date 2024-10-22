@@ -1,36 +1,74 @@
 ---
-interface Project {
-  title: string
-  location?: string
-}
-
-const { title, location } = Astro.props
+import getImageUrl from '@/utils/getImageUrl'
+const { title, location, images } = Astro.props
 ---
 
-
-<div class="c-project">
+<a class="project">
   <h2>{title}</h2>
   {
     location ? (
-      <div class="c-project__location">{location}</div>
+      <div class="location">{location}</div>
     ) : ''
   }
-  <div class="c-project__gallery">
-    <slot />
+  <div class="gallery">
+    {
+      images && images.map(image => (
+        <figure>
+          <img src={getImageUrl(image.asset._ref)} alt={image.alt || title} loading="lazy" />
+          {
+            image.alt ? (
+              <figcaption>{image.alt}</figcaption>
+            ) : ''
+          }
+        </figure>
+      ))
+    }
   </div>
-</div>
+</a>
 
 <style>
-.c-project {
+.project {
+  --gap: var(--sl-spacing-x-large);
+  display: block;
   min-height: 85vh;
 }
-.c-project__location {
-  margin-block-end: var(--sl-spacing-small, 1.8rem);
-  font-size: var(--sl-font-size-large, 1.3rem);
+h2 {
+  font-size: var(--sl-font-size-2x-large);
 }
-.c-project__gallery {
-  display: flex;
+.location {
+  margin-block-end: calc(var(--gap) / 2);
+  font-size: var(--sl-font-size-x-large);
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   flex-wrap: wrap;
-  gap: var(--sl-spacing-medium);
+  justify-content: space-between;
+  gap: var(--sl-spacing-x-large);
+}
+img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+
+@media (max-width: 1640px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 1140px) {
+  .project {
+    --gap: var(--sl-spacing-large);
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .project {
+    --gap: var(--sl-spacing-medium);
+  }
 }
 </style>

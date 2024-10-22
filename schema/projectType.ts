@@ -15,25 +15,48 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
       options: {
         source: 'name'
       }
     }),
     defineField({
-      name: 'image',
-      title: 'Imagem',
-      type: 'image'
+      name: 'gallery',
+      title: 'Galeria',
+      type: 'object',
+      fields: [
+        {
+          name: 'images',
+          type: 'array',
+          title: 'Images',
+          validation: rule => rule.required().min(1).max(3),
+          of: [
+            {
+              name: 'image',
+              type: 'image',
+              title: 'Image',
+              options: {
+                hotspot: true,
+              },
+              fields: [
+                {
+                  name: 'alt',
+                  type: 'string',
+                  title: 'Alternative text',
+                },
+              ],
+            },
+          ],
+          options: {
+            layout: 'grid',
+          },
+        }
+      ]
     }),
     defineField({
       name: 'location',
       title: 'Localização',
       type: 'string',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Descrição',
-      type: 'string',
-    }),
+    })
   ]
 })

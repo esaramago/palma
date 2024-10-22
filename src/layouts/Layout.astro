@@ -1,5 +1,6 @@
 ---
 import '@/css/main.css'
+import Footer from '@/components/Footer.astro'
 
 interface Props {
 	title: string
@@ -16,7 +17,7 @@ const { title } = Astro.props
 		<meta name="viewport" content="width=device-width" />
 
 		<!-- Icons -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -32,59 +33,7 @@ const { title } = Astro.props
 		<link href="https://fonts.googleapis.com/css2?family=K2D:wght@400;600;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<header class="c-header">
-			<h1 class="c-header__container">
-				<div class="c-header__title">Arquitetura paisagista</div>
-				<div class="c-header__name">Paulo Palma</div>
-			</h1>
-		</header>
 		<slot />
-		<footer class="c-footer">
-			<p>Copyright @ 2024. Todos os direitos reservados</p>
-		</footer>
+		<Footer />
 	</body>
 </html>
-<style>
-.c-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70vh;
-  box-sizing: border-box;
-  padding: var(--sl-spacing-medium) var(--sl-spacing-large);
-}
-.c-header__container {
-  display: inline-flex;
-  flex-direction: column;
-}
-.c-header__title {
-  text-align: center;
-  font-size: clamp(2.6rem, 7vw, 6.5rem);
-  line-height: 120%;
-}
-.c-header__name {
-  text-align: right;
-  font-weight: 300;
-  font-size: var(--sl-font-size-2x-large);
-}
-@media (max-width: 768px) {
-  .c-header__name {
-    margin-block-start: var(--sl-spacing-x-small);
-    font-size: var(--sl-font-size-x-large);
-    text-align: center;
-  }
-}
-
-.c-header--small {
-  height: auto;
-}
-
-
-.c-footer {
-  margin-block-start: var(--sl-spacing-x-large);
-  padding: var(--sl-spacing-medium);
-  background-color: var(--sl-color-neutral-700);
-  color: var(--sl-color-neutral-0);
-  text-align: center;
-}
-</style>
