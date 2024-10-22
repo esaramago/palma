@@ -5,15 +5,19 @@ import groq from 'groq'
 interface CustomImageAssetRef {
   _ref: string
 }
-interface CustomImageAsset {
+export interface CustomImageAsset {
   asset: CustomImageAssetRef
+  alt?: string
+}
+interface Gallery {
+  images: CustomImageAsset[]
 }
 export interface Project {
 	title: string
   slug: Slug
   location?: string
 	description?: string
-	image?: CustomImageAsset
+	gallery?: Gallery
 }
 
 export async function getProjects(): Promise<Project[]> {

@@ -1,5 +1,6 @@
 ---
 import getImageUrl from '@/utils/getImageUrl'
+import type {CustomImageAsset} from '@/api'
 const { title, location, images } = Astro.props
 ---
 
@@ -12,7 +13,7 @@ const { title, location, images } = Astro.props
   }
   <div class="gallery">
     {
-      images && images.map(image => (
+      images && images.map((image: CustomImageAsset) => (
         <figure>
           <img src={getImageUrl(image.asset._ref)} alt={image.alt || title} loading="lazy" />
           {
